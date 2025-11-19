@@ -1,18 +1,18 @@
-package entidades;
+package projeto.entidades;
 
 public class Mapa {
 
-	String norte;
-	String nordeste;
-	String sul;
-	String sudeste;
-	String centroOeste;
+	public String norte;
+	public String nordeste;
+	public String sul;
+	public String sudeste;
+	public String centroOeste;
 	
 	//contando quantas posibilidades foram esploradas
-	static long interacoes;
+	private static long interacoes;
 	
 	//contando quantas çinhas foram necessárias para chegar no resultado
-	long incarnacao;
+	private long incarnacao;
 	
 	public Mapa() {
 		this.norte = null;
@@ -80,8 +80,8 @@ public class Mapa {
 	
 	public void printar() {
 		System.out.println();
-		System.out.println("Numero de interações:" + interacoes);
 		System.out.println("Incarnação:" + incarnacao);
+		System.out.println("Numero de interações:" + interacoes);
 
 		System.out.println();
 		System.out.println("Norte: " + this.norte);

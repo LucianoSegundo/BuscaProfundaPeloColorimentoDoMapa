@@ -1,35 +1,40 @@
-package entidades;
+package projeto;
 
 import java.time.LocalTime;
+import java.util.Scanner;
+
+import projeto.entidades.Mapa;
 
 public class Main {
 
 	public static void main(String[] args) throws InterruptedException {
+
+		String regicio = terrivelInterfaceDeUsuario();
 		Mapa apa = new Mapa();
-		
+
 		LocalTime inicio = LocalTime.now();
-		apa =escavar(apa, "sudeste");
+		apa = escavar(apa, regicio);
 		LocalTime fim = LocalTime.now();
 
 		System.out.println();
 		System.out.println("Resultado final");
 		System.out.println();
-		
-		System.out.println("Horario de Inicio: "+inicio.getHour()+":"+inicio.getMinute()+":"+ inicio.getSecond());
-		System.out.println("Horario de termino: "+fim.getHour()+":"+fim.getMinute()+":"+ fim.getSecond());
+
 		apa.printar();
-		
+		System.out.println(
+				"Horario de Inicio: " + inicio.getHour() + ":" + inicio.getMinute() + ":" + inicio.getSecond());
+		System.out.println("Horario de termino: " + fim.getHour() + ":" + fim.getMinute() + ":" + fim.getSecond());
 
 	}
 
-	public static  Mapa escavar(Mapa velho, String alvo) throws InterruptedException {
+	public static Mapa escavar(Mapa velho, String alvo) throws InterruptedException {
 
 		if (velho.preenchido() == true)
 			return velho;
 
 		velho.printar();
 		Thread.sleep(10);
-		
+
 		Mapa novo = new Mapa(velho);
 		// colorindo norte;
 		if (alvo.equals("norte")) {
@@ -52,10 +57,10 @@ public class Main {
 				else
 					regiao = "centro";
 
-				if(novo.verificar() == true) {
+				if (novo.verificar() == true) {
 					Mapa temporario = escavar(novo, regiao);
 					if (temporario != null)
-						return temporario;					
+						return temporario;
 				}
 			}
 			return null;
@@ -81,12 +86,12 @@ public class Main {
 				else if (i >= 6 && i < 9)
 					regiao = "norte";
 
-				if(novo.verificar() == true) {
+				if (novo.verificar() == true) {
 					Mapa temporario = escavar(novo, regiao);
 					if (temporario != null)
-						return temporario;					
+						return temporario;
 				}
-				
+
 			}
 			return null;
 		} else if (alvo.equals("centro")) {
@@ -113,10 +118,10 @@ public class Main {
 				else if (i >= 9 && i < 12)
 					regiao = "sul";
 
-				if(novo.verificar() == true) {
+				if (novo.verificar() == true) {
 					Mapa temporario = escavar(novo, regiao);
 					if (temporario != null)
-						return temporario;					
+						return temporario;
 				}
 			}
 			return null;
@@ -142,10 +147,10 @@ public class Main {
 				else if (i >= 6 && i < 9)
 					regiao = "nordeste";
 
-				if(novo.verificar() == true) {
+				if (novo.verificar() == true) {
 					Mapa temporario = escavar(novo, regiao);
 					if (temporario != null)
-						return temporario;					
+						return temporario;
 				}
 			}
 			return null;
@@ -169,15 +174,67 @@ public class Main {
 				else
 					regiao = "centro";
 
-				if(novo.verificar() == true) {
+				if (novo.verificar() == true) {
 					Mapa temporario = escavar(novo, regiao);
 					if (temporario != null)
-						return temporario;					
+						return temporario;
 				}
 			}
 			return null;
-		} else throw new RuntimeException("Região não encontrada");
+		} else
+			throw new RuntimeException("Região não encontrada");
 
+	}
+
+	public static String terrivelInterfaceDeUsuario() {
+
+		System.out.println("Essa é a Terrivel Interface de Usuário, uhuuuuuuuuuuuuu! tenha medo;");
+		System.out.println(
+				"A partir de assustadoras interações você vai escolher o seu ponto de partida para o colorimento do mapa.");
+		System.out.println("uhuuuuuuuuuuuu, assustador!");
+		System.out.println("Digite o número tenebrono indicado para escolher a terrivel região.");
+		System.out.println();
+		System.out.println(" 1 - Norte. ");
+		System.out.println(" 2 - Nordeste. ");
+		System.out.println(" 3 - Sudeste. ");
+		System.out.println(" 4 - Centro-Oeste. ");
+		System.out.println(" 5 - Sul. ");
+		System.out.println();
+		System.out.print("Escolha: ");
+
+		Scanner entrada = new Scanner(System.in);
+
+		int valor = 0;
+
+		String resultado = "sudeste";
+
+		try {
+			valor = entrada.nextInt();
+			entrada.close();
+
+		} catch (Exception e) {
+			System.out.println();
+			System.out.println(
+					"Você entrou com um tenebroso valor invalido, como uma punição assustadora, começaremos com o Sudeste por padrão.");
+
+			return resultado;
+		}
+
+		if (valor == 1)
+			resultado = "norte";
+		else if (valor == 2)
+			resultado = "nordeste";
+		else if (valor == 3)
+			resultado = "sudeste";
+		else if (valor == 4)
+			resultado = "centro";
+		else if (valor == 5)
+			resultado = "sul";
+		else
+			System.out.println(
+					"Como a responta foi assustadoramente invalida, o tenebroso ponto de inicio será o sudeste, uhuuuuuuuuu!!");
+
+		return resultado;
 	}
 
 }
